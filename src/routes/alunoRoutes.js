@@ -12,5 +12,8 @@ router.get("/:id", (request, response)=>{
     return alunoController.findUnique(request, response);
 });
 router.post("/", validarAluno, alunoController.create);
+router.patch("/:id", (request, response)=>{
+    return alunoController.update(request,response);
+});
 
 module.exports = router;

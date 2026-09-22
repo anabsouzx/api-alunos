@@ -44,6 +44,27 @@ class AlunoService{
 
         return novoAluno;
     }
+
+    async update(id, novosDados){
+        if(!novosDados.nome && !novosDados.email){
+            throw new AlunoInvalidoError("Nenhum dado válido foi encontrado para a atualização");
+        }
+
+        await this.findUnique(id);
+
+        try{
+            const alunoAtualizado = await prisma.aluno.update({
+                where: { id: Number(id) },
+                data: novosDados
+            });
+            return alunoAtualizado;
+        }catch(error){
+            if(error.code==='P2002'){
+                throw new AlunoInvalidoError("E-mail já cadastrado");
+            }
+            throw error;
+        }
+    }
 }
 
 module.exports = new AlunoService();
