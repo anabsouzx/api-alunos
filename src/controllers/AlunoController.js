@@ -41,6 +41,17 @@ class AlunoController{
             return response.status(error.statusCode || 500).json({ erro: error.message });
         }
     }
+
+    async delete(request, response){
+        try{
+            const { id } = request.params;
+            await alunoService.delete(id);
+
+            return response.status(204).send();
+        }catch(error){
+            return response.status(error.statusCode || 500).json({ erro: error.message });
+        }
+    }
 }
 
 module.exports = new AlunoController();

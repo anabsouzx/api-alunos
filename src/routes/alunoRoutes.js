@@ -15,5 +15,8 @@ router.post("/", validarAluno, alunoController.create);
 router.patch("/:id", (request, response)=>{
     return alunoController.update(request,response);
 });
+router.delete("/:id", (request, response)=>{
+    return alunoController.delete(request, response);
+});
 
 module.exports = router;
